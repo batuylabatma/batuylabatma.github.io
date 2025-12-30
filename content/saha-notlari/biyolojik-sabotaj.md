@@ -1,27 +1,31 @@
 ---
-title: "Giyindiğini Sanıyorsun Ama Paketleniyorsun: Polyester Baksır ve Biyolojik Sabotaj"
+title: "Biyolojik Sabotaj: Polyester Giyim ve Hormonal Etkiler"
 date: 2025-12-30
 draft: false
-tags: ["Sağlık", "Biyohack", "Giyim"]
-categories: ["Biyolojik Sabotaj"]
-description: "Vücudunun en hassas bölgesini neden plastik poşetle sarıyorsun? Polyesterin sera etkisi ve hormonal sistemindeki gizli sızıntılar."
+tags: ["Sağlık", "Biyohack", "Giyim", "Hormon Sağlığı"]
+categories: ["Yaşam Optimizasyonu"]
+description: "Sentetik kıyafetlerin vücut ısısı, terleme ve hormonal denge üzerindeki gizli etkilerini keşfedin. Neden %100 pamuk tercih etmeliyiz?"
 ---
 
-Modern dünyada, en büyük sabotajlar genellikle "en ucuz" ve "en yaygın" olanlar üzerinden yapılır. Bugün dolabındaki o renkli, şık ama %100 plastik (polyester) baksırlardan bahsedeceğiz.
+Çoğu insan ne yediğine dikkat eder ama ne giydiğinin biyolojik maliyetini hesaplamaz. Modern tekstil endüstrisi, maliyeti düşürmek için bizi "plastik" giymeye alıştırdı.
 
-### Sera Etkisi: Mikro-Klimatik Felaket
-Testisler, vücudun geri kalanından yaklaşık 2 derece daha soğuk kalacak şekilde tasarlanmıştır. Bu, biyolojik bir zorunluluktur. Ancak üzerine geçirdiğin polyester kumaş, ısıyı hapseder.
-- **Isı Artışı:** Polyester hava geçirmez. Vücut ısın yükselir, bölge terler ve kurumaz.
-- **Sera Etkisi:** Bu yapay ısı artışı, sperm kalitesini ve testosteron üretimini doğrudan hedef alır.
+## Polyester = Giyilebilir Sera Etkisi
 
-### Kimyasal Sızıntı
-Polyester sadece ısıyı tutmaz, aynı zamanda bir petrol türevidir. Isı ve ter ile birleştiğinde, kumaştaki kimyasallar deri yoluyla emilmeye başlar. Modern erkeğin "neden yorgunum?" veya "neden odaklanamıyorum?" sorularının cevabı bazen sadece pantolonunun içindedir.
+Polyester, özünde bir plastiktir (PET). Cildiniz en büyük boşaltım organınızdır ve nefes alması gerekir. Sentetik kumaşlar ise cildinizi plastik bir film gibi kaplayarak şu sorunlara yol açar:
 
-### Çözüm: Yamayı Uygulayın
-Sistemi hacklemek her zaman karmaşık olmak zorunda değildir. Bazen sadece "varsayılan" seçimi reddetmek yeterlidir.
-1. **Etiket Okuma:** Satın aldığın her şeyin etiketine bak. %100 Pamuk (Cotton) veya Modal dışında hiçbir şeye izin verme.
-2. **Eskileri İmha Et:** Polyester olanları çöpe at. Bu bir yatırım değil, bir savunma mekanizmasıdır.
+### 1. Mikroplastik Sızıntısı ve Hormonlar
+Vücut ısısıyla temas eden sentetik lifler, endokrin bozucu özelliği olan kimyasalları cildiniz üzerinden sisteme sızdırabilir. Bu durum, uzun vadede hormonal dengenizi sabote eder.
 
-Yamayı uygulamak ve onaylı ekipmanlara göz atmak için [Envanter](/envanter) sayfamıza sızın.
+### 2. Isı Düzenlemesi (Termoregülasyon)
+%100 Pamuk veya Keten teri emer ve vücudun soğumasına yardımcı olur. Polyester ise nemi hapseder, bakteri üremesini (kötü koku) artırır ve vücut ısısını yapay olarak yükseltir.
 
-{{< button label="Onaylı Biyolojik Zırhlar" link="/envanter/" >}}
+## Saha Notu: Kumaş Seçimi
+
+Garderobunuzdaki "varsayılan ayarları" değiştirin:
+- **İç Çamaşırı:** Mutlaka %100 Pamuk olmalı (Üreme sağlığı için kritik).
+- **Yatak Takımları:** Gece boyunca vücudun nefes alması için sentetikten kaçının.
+- **Etiket Okuma:** Satın aldığınız ürünlerin içerik etiketlerini bir "kod analizi" yapar gibi inceleyin.
+
+Vücut sisteminizi korumak için doğal materyallere geri dönün.
+
+Daha fazla farkındalık notu için [Manifesto](/manifesto) sayfamıza göz atın.

@@ -1,22 +1,29 @@
 ---
-title: "QR Kodlar: Masum Görünen Oltalama"
+title: "QR Kod Oltalama (Quishing): Yeni Nesil Dolandırıcılık"
 date: 2025-12-30
 draft: false
-tags: ["Siber Güvenlik", "Oltalama", "QR Kod"]
+tags: ["Siber Güvenlik", "Oltalama", "QR Kod Güvenliği", "Sosyal Mühendislik"]
 categories: ["Dijital Savunma"]
-description: "Restoran menülerinden faturalara kadar her yerde olan QR kodlar aslında birer arka kapı olabilir mi?"
+description: "Restoran menülerinden ödeme dekontlarına kadar her yerde olan QR kodlar aslında birer arka kapı olabilir. QR oltalama (Quishing) nedir ve nasıl korunulur?"
 ---
 
-Hızlı, pratik ve her yerde. Ancak bir QR kodun arkasında ne olduğunu taratmadan bilemezsiniz. Siber saldırganlar için QR kodlar, sizi zararlı yazılımlara veya sahte sitelere yönlendirmenin en kolay yoludur.
+Hızlı, pratik ve her yerde. Ancak bir QR kodun arkasında ne olduğunu taratmadan göremiyorsunuz. İşte bu "görünmezlik", siber saldırganlar için mükemmel bir sosyal mühendislik aracıdır.
 
-### QR Oltalama (Quishing) Nasıl Çalışır?
-Saldırganlar, meşru kurumların (belediyeler, restoranlar, bankalar) QR kodlarının üzerine kendi etiketlerini yapıştırırlar. Siz "Menüyü Gör" diye tarattığınızda:
-- Cihazınıza sessizce zararlı bir APK/dosya inebilir.
-- Bilgilerinizi çalmak için tasarlanmış sahte bir ödeme sayfasına yönlendirilebilirsiniz.
+## QR Oltalama (Quishing) Sistemi Nasıl Çalışır?
 
-### Güvenli Tarama Protokolü
-- **Fiziksel Kontrol:** Etiketlerin üzerine sonradan yapıştırılmış bir parça olup olmadığını kontrol edin.
-- **Link Önizleme:** QR tarayıcınızın linki açmadan önce önizlemesini gösterdiğinden emin olun. Adresi dikkatle okuyun.
-- **Global Uygulamalardan Kaçının:** Sadece QR okumak için "Fener" veya "Dosya Yöneticisi" gibi izin isteyen uygulamaları indirmeyin. Telefonunuzun kendi kamerasını kullanın.
+Saldırganlar, fiziksel veya dijital alanlardaki meşru QR kodların üzerine kendi zararlı kodlarını yerleştirirler. "Menüyü Gör", "Park Ücretini Öde" veya "Kampanyaya Katıl" gibi masum görünen çağrılarla sizi tuzağa çekerler.
 
-Sinyalin temiz olduğundan emin olun. Daha fazla dijital savunma için [Saha Notları](/saha-notlari) takibinde kalın.
+### QR Taratmanın Olası Riskleri
+- **Zararlı Yazılım Yükleme:** Cihazınıza otomatik olarak inen ajan yazılımlar (Spyware).
+- **Kimlik Avı Sayfaları:** Banka veya e-posta giriş ekranlarını taklit eden sahte web siteleri.
+- **Otomatik Abonelikler:** Farkında olmadan onay verdiğiniz ücretli servisler.
+
+## Quishing Savunma Protokolü
+
+- **Fiziksel İnceleme:** Restoranlardaki QR kodların üzerine sonradan bir etiket yapıştırılıp yapıştırılmadığını elinizle kontrol edin.
+- **URL Önizleme Kuralı:** Kameranızı tuttuğunuzda çıkan linki hemen açmayın. Adresin `https://` ile başladığından ve domain adının doğruluğundan emin olun.
+- **Özel Uygulamalardan Kaçının:** "Hızlı QR Okuyucu" gibi 3. taraf uygulamalar yerine telefonunuzun kendi kamera uygulamasını kullanın. Bu uygulamalar genelde kendi içlerinde reklam (adware) barındırır.
+
+Dijital dünyadaki "kısa yollar" her zaman en güvenli yollar değildir.
+
+Analizleri kaçırmamak için [Manifesto](/manifesto) sayfamızı okuyun ve sistem dışına çıkın.
