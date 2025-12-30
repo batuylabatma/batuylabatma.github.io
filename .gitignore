@@ -1,0 +1,16 @@
+# Hugo default output
+public/
+resources/
+_vendor/
+
+# Binary files
+hugo_latest
+hugo_extended_*
+
+# Build logs and locks
+hugo_build.lock
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
