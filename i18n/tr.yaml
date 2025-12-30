@@ -1,0 +1,10 @@
+- home:
+    other: "Ana Sayfa"
+- read_more:
+    other: "Devamını Oku"
+- reading_time:
+    one: "1 dakikalık okuma"
+    other: "{{ .Count }} dakikalık okuma"
+- word_count:
+    one: "1 kelime"
+    other: "{{ .Count }} kelime"

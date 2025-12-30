@@ -1,0 +1,75 @@
+baseURL = '/'
+languageCode = 'tr'
+defaultContentLanguage = 'tr'
+title = 'Batuylabatma'
+
+theme = 'PaperMod'
+pluralizeListTitles = false
+enableRobotsTXT = true
+
+[params]
+    mainSections = ["saha-notlari"]
+    env = 'production'
+    title = 'batuylabatma'
+    description = 'Hayatın varsayılan ayarlarını hackleyen bir Ar-Ge mühendisinin notları.'
+    author = 'batuylabatma'
+    
+    defaultTheme = 'auto'
+    disableThemeToggle = false
+    ShowReadingTime = true
+    ShowShareButtons = true
+    ShowPostNavLinks = true
+    ShowBreadCrumbs = true
+    ShowCodeCopyButtons = true
+    hideFooter = false # We want footer, but no credits
+    showPoweredBy = false # This removes 'Powered by'
+
+    
+    [params.profileMode]
+        enabled = true
+        title = 'batuylabatma'
+        subtitle = "Sizi kandırıyorlar. Ben ise o kandırmacanın kodlarını çözüyorum."
+        imageUrl = '/images/batuylabatma_pp.jpg'
+        imageTitle = 'batuylabatma'
+        imageWidth = 120
+        imageHeight = 120
+        
+        [[params.profileMode.buttons]]
+            name = 'Saha Notları'
+            url = 'saha-notlari'
+        [[params.profileMode.buttons]]
+            name = 'Envanter'
+            url = 'envanter'
+        [[params.profileMode.buttons]]
+            name = 'Manifesto'
+            url = 'manifesto'
+
+    [[params.socialIcons]]
+        name = "instagram"
+        url = "https://instagram.com/batuylabatma"
+    [[params.socialIcons]]
+        name = "tiktok"
+        url = "https://tiktok.com/@batuylabatma"
+
+
+
+[menu]
+    [[menu.main]]
+        identifier = 'saha-notlari'
+        name = 'Saha Notları'
+        url = '/saha-notlari/'
+        weight = 10
+
+    [[menu.main]]
+        identifier = 'envanter'
+        name = 'Envanter'
+        url = '/envanter/'
+        weight = 20
+    [[menu.main]]
+        identifier = 'manifesto'
+        name = 'Manifesto'
+        url = '/manifesto/'
+        weight = 30
+
+[markup.highlight]
+    noClasses = false
