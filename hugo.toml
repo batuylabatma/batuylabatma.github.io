@@ -1,4 +1,4 @@
-baseURL = '/'
+baseURL = 'https://batuylabatma.github.io/'
 languageCode = 'tr'
 defaultContentLanguage = 'tr'
 title = 'Batuylabatma'
