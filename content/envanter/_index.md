@@ -1,16 +1,22 @@
 ---
 title: "Envanter"
-description: "Donanım analizleri ve sistem yamaları çok yakında..."
-date: 2025-12-30
+description: "Test edilmiş ve kullanımı onaylanmış ekipman listesi."
+date: 2026-01-03
 draft: false
 ---
 
-### Sistem Yamaları ve Donanımlar
+Aşağıdaki veri tabanı, tarafımca teknik ve biyolojik analizlerden geçirilmiş, "sistem dostu" olduğu doğrulanmış ekipmanları içerir. Bu liste yaşayan bir organizmadır ve sürekli güncellenir.
 
-**Durum:** Analiz Devam Ediyor...
+### 🛡️ Biyolojik Zırhlar (Giyim & Tekstil)
 
-"Donanım analizleri ve sistem yamaları çok yakında bu kanala sızdırılacak. Ekipmanların teknik verileri doğrulanıyor."
+Vücut ısısını optimize eden ve toksik yükü azaltan giyilebilir donanımlar.
+
+| Kod | Ekipman Türü | Analiz Durumu | Erişim Protokolü |
+| :--- | :--- | :--- | :--- |
+| **ZR-01** | **Bambu/Modal Boxer** <br> *(Anti-Bakteriyel & Nefes Alan)* | ✅ **ONAYLANDI** <br> [📋 Analiz Raporunu Oku](/saha-notlari/biyolojik-sabotaj) | [🛒 **Koleksiyonu Temin Et**](https://app.hb.biz/2aKe5uzyA7oI) |
+| **ZR-02** | **%100 Pamuk Tişört** <br> *(Plastiksiz Temas)* | ⚠️ *Test Aşamasında* | *Yakında Eklenecek* |
 
 ---
+
 
 {{< button label="Ana Sayfaya Dön" link="/" >}}
