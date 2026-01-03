@@ -1,6 +1,6 @@
 ---
 title: "Envanter"
-description: "Test edilmiş ve kullanımı onaylanmış ekipman listesi."
+description: "Test edilmiş ve kullanımı onaylanmış ekipman listesi. Tüm ürünleri hepsiburada üzerinden satın alabilirsiniz."
 date: 2026-01-03
 draft: false
 ---
