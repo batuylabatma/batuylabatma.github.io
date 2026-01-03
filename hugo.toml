@@ -30,7 +30,7 @@ googleAnalytics = "G-VWH1ZR7X5V"
     [params.profileMode]
         enabled = true
         title = 'batuylabatma'
-        subtitle = "Sizi kandırıyorlar. Ben ise o kandırmacanın kodlarını çözüyorum."
+        subtitle = "Videolarda anlattığım ürünlere 'Envanter' sekmesinden ulaşabilirsiniz."
         imageUrl = '/images/batuylabatma_pp.jpg'
         imageTitle = 'batuylabatma'
         imageWidth = 120
