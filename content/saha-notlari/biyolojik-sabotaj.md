@@ -1,6 +1,6 @@
 ---
 title: "Biyolojik Sabotaj: Giyilebilir Plastiklerin (Polyester) Hormonal Maliyeti"
-date: 2025-12-30
+date: 2026-01-03
 draft: false
 tags: ["Sağlık", "Biyohack", "Giyim", "Hormon Sağlığı", "Biyolojik Güvenlik"]
 categories: ["Yaşam Optimizasyonu"]
@@ -29,19 +29,27 @@ Hücresel düzeyde savunma sağlamak için gardırobunuzun "varsayılan ayarlar�
 
 ### Pamuk, Keten ve Yün: Sistemin Orijinali
 Doğal lifler, binlerce yıldır insan biyolojisine uyumludur. Bu lifler:
--   **Nefes Alır:** Vücut ısısını stabilize eder.
--   **Emicidir:** Teri ciltten uzaklaştırır.
--   **Anti-Statiktir:** Sentetikler gibi vücudun statik elektrik dengesini bozmazlar.
+- **Nefes Alır:** Vücut ısısını stabilize eder.
+- **Emicidir:** Teri ciltten uzaklaştırır.
+- **Anti-Statiktir:** Sentetikler gibi vücudun statik elektrik dengesini bozmazlar.
 
 ### Değişim Protokolü
-1.  **Etiket Okuma Okuryazarlığı:** Satın aldığınız her kıyafetin iç etiketini bir kod bloğu inceler gibi okuyun. "%100 Pamuk", "%100 Keten" veya "%100 Yün" ifadelerini arayın. 
-2.  **Öncelik Sıralaması:** Eğer her şeyi değiştiremiyorsanız, ilk olarak cildinize doğrudan ve en uzun süre temas eden **iç çamaşırlarınızı ve yatak takımlarınızı** doğal liflerle değiştirin. Bu, biyolojik yükünüzü hızla azaltacaktır.
-3.  **Performans Kumaşları Aldatmacası:** Spor yaparken giydiğiniz "ter emici" sentetiklerin çoğu aslında vücudun ısı atma mekanizmasını bozar. Mümkünse sporda da yüksek kaliteli ince pamuklu ürünleri tercih edin.
+1. **Etiket Okuma Okuryazarlığı:** Satın aldığınız her kıyafetin iç etiketini bir kod bloğu inceler gibi okuyun. "%100 Pamuk", "%100 Keten" veya "%100 Yün" ifadelerini arayın.
+2. **Öncelik Sıralaması:** Eğer her şeyi değiştiremiyorsanız, ilk olarak cildinize doğrudan ve en uzun süre temas eden **iç çamaşırlarınızı ve yatak takımlarınızı** doğal liflerle değiştirin. Bu, biyolojik yükünüzü hızla azaltacaktır.
+3. **Performans Kumaşları Aldatmacası:** Spor yaparken giydiğiniz "ter emici" sentetiklerin çoğu aslında vücudun ısı atma mekanizmasını bozar. Mümkünse sporda da yüksek kaliteli ince pamuklu ürünleri tercih edin.
+
+## 🛡️ Saha Önerisi: Hangi Ekipmanı Seçmeli?
+
+Piyasada "doğal" diye satılan ama karışım olan çok fazla ürün var. Sizin için içerik analizini yaptığım, test ettiğim ve onayladığım **Bambu ve Modal** içerikli modelleri Envanter sayfasına ekledim.
+
+Sisteminizin güvenliği için bu listeyi kullanabilirsiniz:
+
+{{< button label="Onaylı Boxer Listesini İncele (Envanter)" link="/envanter" >}}
+
+---
 
 ## Sonuç: Vücudunuz Bir Tapınak, Onu Plastikle Kaplamayın
 
-Siber dünyadaki firewall'larımız ne kadar önemliyse, biyolojik sistemimizi koruyan "fiziksel katman" (giyim) da o kadar önemlidir. Modern dünyanın size sunduğu ucuz ve pratik seçenekler, bazen uzun vadeli biyolojik maliyetlere sahiptir.
+Siber dünyadaki firewall'larımız (güvenlik duvarı) ne kadar önemliyse, biyolojik sistemimizi koruyan "fiziksel katman" (giyim) da o kadar önemlidir. Modern dünyanın size sunduğu ucuz ve pratik seçenekler, bazen uzun vadeli biyolojik maliyetlere sahiptir.
 
 Doğallığa dönüş, sistemin en güçlü yamasıdır.
-
-Yaşam optimizasyonları ve biyohack analizleri için [Manifesto](/manifesto) sayfamıza göz atın ve [Saha Notları](/saha-notlari) bölümünü takipte kalın.
