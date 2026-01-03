@@ -7,6 +7,8 @@ theme = 'PaperMod'
 pluralizeListTitles = false
 enableRobotsTXT = true
 
+googleAnalytics = "G-VWH1ZR7X5V"
+
 [params]
     mainSections = ["saha-notlari"]
     env = 'production'
