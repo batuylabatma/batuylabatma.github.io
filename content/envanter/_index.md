@@ -1,22 +1,36 @@
 ---
 title: "Envanter"
-description: "Test edilmiş ve kullanımı onaylanmış ekipman listesi. Tüm ürünleri hepsiburada üzerinden satın alabilirsiniz."
+description: "Test edilmiş ve kullanımı onaylanmış sağlıklı ekipman listesi."
 date: 2026-01-03
 draft: false
 ---
 
-Aşağıdaki veri tabanı, tarafımca teknik ve biyolojik analizlerden geçirilmiş, "sistem dostu" olduğu doğrulanmış ekipmanları içerir. Bu liste yaşayan bir organizmadır ve sürekli güncellenir.
+Bu sayfada gördüğünüz tüm ürünler tarafımca incelenmiş, sağlık testlerinden geçirilmiş ve **"onaylı"** olarak listelenmiştir. 
 
-### 🛡️ Biyolojik Zırhlar (Giyim & Tekstil)
-
-Vücut ısısını optimize eden ve toksik yükü azaltan giyilebilir donanımlar.
-
-| Kod | Ekipman Türü | Analiz Durumu | Erişim Protokolü (Hepsiburada)|
-| :--- | :--- | :--- | :--- |
-| **ZR-01** | **Bambu/Modal Boxer** <br> *(Anti-Bakteriyel & Nefes Alan)* | ✅ **ONAYLANDI** <br> [📋 Analiz Raporunu Oku](/saha-notlari/biyolojik-sabotaj) | [🛒 **Koleksiyonu Temin Et**](https://app.hb.biz/2aKe5uzyA7oI) |
-| **ZR-02** | **%100 Pamuk Tişört** <br> *(Plastiksiz Temas)* | ⚠️ *Test Aşamasında* | *Yakında Eklenecek* |
+Aşağıdaki butonlara tıklayarak **Hepsiburada** üzerinden oluşturduğum listeleri inceleyebilir ve güvenle satın alabilirsiniz.
 
 ---
 
+### 🛡️ Biyolojik Zırhlar (Giyim & Tekstil)
+*Vücut ısısını dengeleyen, terletmeyen ve plastik içermeyen sağlıklı giysiler.*
 
-{{< button label="Ana Sayfaya Dön" link="/" >}}
+#### 🩳 Bambu ve Modal Boxerlar
+Naylon ve polyesterin aksine cildin nefes almasını sağlar. Bakteri oluşumunu ve kötü kokuyu engeller. Erkek sağlığı (Testosteron ve ısı dengesi) için kritik önem taşır.
+
+> **Durum:** ✅ **ONAYLANDI** (Test Edildi)
+
+{{< button label="Hepsiburada'da İncele ve Satın Al ➔" link="https://app.hb.biz/2aKe5uzyA7oI" >}}
+
+---
+
+#### 👕 %100 Pamuk Tişörtler
+Cildinize doğrudan temas eden yüzeyin "plastik" (polyester) değil, doğal pamuk olması gerekir.
+
+> **Durum:** ⚠️ **Analiz Sürüyor** (Yakında Eklenecek)
+
+---
+
+### ⚠️ Önemli Bilgilendirme
+*Listelediğim ürünleri Hepsiburada üzerinden güvenle alabilirsiniz. Bu bağlantılar üzerinden yaptığınız alışverişler, kanalın ve araştırmaların devamlılığına katkı sağlar.*
+
+{{< button label="🏠 Ana Sayfaya Dön" link="/" >}}
