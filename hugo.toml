@@ -30,7 +30,7 @@ googleAnalytics = "G-VWH1ZR7X5V"
     [params.profileMode]
         enabled = true
         title = 'batuylabatma'
-        subtitle = "Videolarda anlattığım ürünlere 'Envanter' sekmesinden ulaşabilirsiniz."
+        subtitle = "Videolarda anlattığım ürünlere aşağıdaki 'Önerdiğim Ürünler' butonundan ulaşabilirsiniz."
         imageUrl = '/images/batuylabatma_pp.jpg'
         imageTitle = 'batuylabatma'
         imageWidth = 120
@@ -40,8 +40,8 @@ googleAnalytics = "G-VWH1ZR7X5V"
             name = 'Saha Notları'
             url = 'saha-notlari'
         [[params.profileMode.buttons]]
-            name = 'Envanter'
-            url = 'envanter'
+            name = 'Önerdiğim Ürünler'
+            url = 'https://app.hb.biz/2aKe5uzyA7oI'
         [[params.profileMode.buttons]]
             name = 'Manifesto'
             url = 'manifesto'
@@ -63,9 +63,9 @@ googleAnalytics = "G-VWH1ZR7X5V"
         weight = 10
 
     [[menu.main]]
-        identifier = 'envanter'
-        name = 'Envanter'
-        url = '/envanter/'
+        identifier = 'shop'
+        name = 'Önerdiğim Ürünler'
+        url = 'https://app.hb.biz/2aKe5uzyA7oI'
         weight = 20
     [[menu.main]]
         identifier = 'manifesto'
