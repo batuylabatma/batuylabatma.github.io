@@ -41,7 +41,7 @@ googleAnalytics = "G-VWH1ZR7X5V"
             url = 'saha-notlari'
         [[params.profileMode.buttons]]
             name = 'Önerdiğim Ürünler'
-            url = 'https://app.hb.biz/2aKe5uzyA7oI'
+            url = 'https://app.hb.biz/RSzgCYQIMNNW'
         [[params.profileMode.buttons]]
             name = 'Manifesto'
             url = 'manifesto'
@@ -65,7 +65,7 @@ googleAnalytics = "G-VWH1ZR7X5V"
     [[menu.main]]
         identifier = 'shop'
         name = 'Önerdiğim Ürünler'
-        url = 'https://app.hb.biz/2aKe5uzyA7oI'
+        url = 'https://app.hb.biz/RSzgCYQIMNNW'
         weight = 20
     [[menu.main]]
         identifier = 'manifesto'
