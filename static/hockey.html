@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neon P2P Hokey</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --host-color: #00ff00;
+            --client-color: #ff00ff;
+            --puck-color: #00ffff;
+            --text-glow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            touch-action: none;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+        }
+
+        /* UI Overlays */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.96);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.3s;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--puck-color);
+            text-shadow: 0 0 20px var(--puck-color);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #ddd;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .input-group {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        input,
+        select {
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            padding: 10px 15px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--puck-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        .btn {
+            background: transparent;
+            color: var(--host-color);
+            border: 2px solid var(--host-color);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            transition: all 0.2s ease;
+            margin: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            color: var(--puck-color);
+            border-color: var(--puck-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px var(--host-color);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 20px var(--puck-color);
+        }
+
+        .creator-credits {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        /* In-Game UI */
+        .game-ui {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+            z-index: 50;
+        }
+
+        .player-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .name {
+            font-size: 1.2rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        /* Modal */
+        #about-modal {
+            background: rgba(20, 20, 20, 0.98);
+            z-index: 200;
+        }
+
+        #about-content {
+            max-width: 600px;
+            padding: 40px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        #qrcode {
+            background: white;
+            padding: 10px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+
+        #game-over-modal h1 {
+            color: white;
+        }
+
+        #winner-text {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--host-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- UI Overlay: Main Menu -->
+        <div id="main-menu" class="overlay">
+            <h1>Neon Hokey</h1>
+            <h2>P2P Çok Oyunculu</h2>
+
+            <div class="input-group">
+                <label>İSMİNİZİ GİRİN</label>
+                <input type="text" id="username-input" placeholder="Oyuncu 1" maxlength="10">
+            </div>
+
+            <div id="host-options" class="input-group">
+                <label>SKOR LİMİTİ</label>
+                <select id="score-limit">
+                    <option value="5">5 Puan</option>
+                    <option value="10" selected>10 Puan</option>
+                    <option value="20">20 Puan</option>
+                </select>
+            </div>
+
+            <button id="create-btn" class="btn">OYUN OLUŞTUR</button>
+            <button id="about-btn" class="btn btn-secondary">Hakkında</button>
+
+            <div id="join-status" style="display:none; margin-top: 20px;">
+                <p id="join-msg">Odaya Katılınıyor...</p>
+            </div>
+
+            <div class="creator-credits">batuylabatma tarafından hazırlanmıştır</div>
+        </div>
+
+        <!-- UI Overlay: Waiting Room -->
+        <div id="waiting-room" class="overlay hidden">
+            <h1>Rakip Bekleniyor...</h1>
+            <div id="qrcode"></div>
+            <p style="color:#aaa; max-width: 300px; word-break: break-all;" id="share-link"></p>
+            <p>Bu linki paylaşın veya QR kodu okutun.</p>
+            <button onclick="location.reload()" class="btn btn-secondary" style="margin-top:30px;">İptal</button>
+        </div>
+
+        <!-- UI Overlay: About -->
+        <div id="about-modal" class="overlay hidden">
+            <div id="about-content">
+                <h1 style="font-size: 2rem; margin-bottom: 20px;">Hakkında</h1>
+                <p><strong>Sürüm:</strong> 1.1.0</p>
+                <p><strong>Yapımcı:</strong> batuylabatma</p>
+                <p>HTML5 Canvas ve WebRTC kullanılarak yapılmış sunucusuz Air Hockey oyunu.</p>
+                <ul style="margin: 20px 0; padding-left: 20px;">
+                    <li>Gerçek zamanlı fizik</li>
+                    <li>Sıfır gecikme (İstemci tahmini)</li>
+                    <li>Titreşim ve Ses efektleri</li>
+                </ul>
+                <div style="text-align: center; margin-top: 40px;">
+                    <button id="close-about" class="btn">Geri</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI Overlay: Game Over -->
+        <div id="game-over-modal" class="overlay hidden">
+            <h1>OYUN BİTTİ</h1>
+            <div id="winner-text">KAZANAN</div>
+            <button onclick="location.reload()" class="btn">Ana Menü</button>
+        </div>
+
+        <!-- In-Game UI -->
+        <div id="game-ui" class="game-ui hidden">
+            <div class="player-info" id="top-info">
+                <div class="score" id="score-top" style="color: var(--client-color)">0</div>
+                <div class="name" id="name-top" style="color: var(--client-color)">RAKİP</div>
+            </div>
+
+            <div class="player-info" id="bottom-info">
+                <div class="score" id="score-bottom" style="color: var(--host-color)">0</div>
+                <div class="name" id="name-bottom" style="color: var(--host-color)">SEN</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        /**
+         * NEON AIR HOCKEY - P2P
+         * batuylabatma tarafından hazırlanmıştır
+         */
+
+        const AudioSys = {
+            ctx: new (window.AudioContext || window.webkitAudioContext)(),
+            playTone: function (freq, type, duration) {
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                osc.type = type;
+                gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + duration);
+            },
+            hitWall: function () { this.playTone(150, 'square', 0.1); },
+            hitPaddle: function () { this.playTone(300, 'sine', 0.1); },
+            score: function () {
+                setTimeout(() => this.playTone(400, 'square', 0.1), 0);
+                setTimeout(() => this.playTone(600, 'square', 0.2), 100);
+            },
+            win: function () {
+                setTimeout(() => this.playTone(400, 'triangle', 0.2), 0);
+                setTimeout(() => this.playTone(600, 'triangle', 0.2), 200);
+                setTimeout(() => this.playTone(800, 'triangle', 0.4), 400);
+            }
+        };
+
+        function vibrate(ms) {
+            if (navigator.vibrate) navigator.vibrate(ms);
+        }
+
+        // --- Configuration ---
+        const CANVAS_WIDTH = 450;
+        const CANVAS_HEIGHT = 800;
+        const PUCK_RADIUS = 18;
+        const PADDLE_RADIUS = 35;
+        const GOAL_SIZE = 160; // Slightly larger for better scoring visuals
+
+        const MAX_SPEED = 22;
+        const FRICTION = 0.997;
+
+        // --- State ---
+        const state = {
+            role: null, // 'host' or 'client'
+            status: 'menu',
+            peer: null,
+            conn: null,
+            roomId: null,
+            config: {
+                maxScore: 10,
+                hostName: 'Ev Sahibi',
+                clientName: 'Misafir'
+            },
+            game: {
+                puck: { x: CANVAS_WIDTH / 2, y: CANVAS_HEIGHT / 2, vx: 0, vy: 0 },
+                hostPaddle: { x: CANVAS_WIDTH / 2, y: CANVAS_HEIGHT - 80, vx: 0, vy: 0 },
+                clientPaddle: { x: CANVAS_WIDTH / 2, y: 80, vx: 0, vy: 0 },
+                score: { host: 0, client: 0 }
+            },
+            input: { x: CANVAS_WIDTH / 2, y: 0 },
+            particles: []
+        };
+
+        // --- Elements ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // --- Resize ---
+        function resize() {
+            const aspect = CANVAS_WIDTH / CANVAS_HEIGHT;
+            const winW = window.innerWidth;
+            const winH = window.innerHeight;
+
+            let w, h;
+            if (winW / winH < aspect) {
+                w = winW;
+                h = winW / aspect;
+            } else {
+                h = winH;
+                w = winH * aspect;
+            }
+
+            canvas.width = CANVAS_WIDTH;
+            canvas.height = CANVAS_HEIGHT;
+            canvas.style.width = `${w}px`;
+            canvas.style.height = `${h}px`;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // --- Particles ---
+        function spawnParticles(x, y, color, count = 40) { // Increased count
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 8 + 3; // Faster
+                state.particles.push({
+                    x: x, y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    color: color,
+                    life: 1.0
+                });
+            }
+        }
+
+        function updateParticles() {
+            for (let i = state.particles.length - 1; i >= 0; i--) {
+                const p = state.particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= 0.02;
+                if (p.life <= 0) state.particles.splice(i, 1);
+            }
+        }
+
+        function drawParticles(transformY) {
+            state.particles.forEach(p => {
+                ctx.globalAlpha = p.life; // Make sure this is respected
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                // Transform Y if needed (for Client)
+                ctx.arc(p.x, transformY ? transformY(p.y) : p.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1.0;
+        }
+
+        // --- Logic ---
+        function getQueryParam(name) { return new URLSearchParams(window.location.search).get(name); }
+
+        function startGame() {
+            state.status = 'playing';
+            document.getElementById('waiting-room').classList.add('hidden');
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('game-ui').classList.remove('hidden');
+
+            // Update Names
+            const topName = document.getElementById('name-top');
+            const bottomName = document.getElementById('name-bottom');
+            const topScore = document.getElementById('score-top');
+            const bottomScore = document.getElementById('score-bottom');
+
+            if (state.role === 'host') {
+                bottomName.innerText = state.config.hostName;
+                topName.innerText = state.config.clientName;
+
+                bottomName.style.color = 'var(--host-color)';
+                bottomScore.style.color = 'var(--host-color)';
+                topName.style.color = 'var(--client-color)';
+                topScore.style.color = 'var(--client-color)';
+            } else {
+                bottomName.innerText = state.config.clientName;
+                topName.innerText = state.config.hostName;
+
+                bottomName.style.color = 'var(--client-color)';
+                bottomScore.style.color = 'var(--client-color)';
+                topName.style.color = 'var(--host-color)';
+                topScore.style.color = 'var(--host-color)';
+            }
+
+            loop();
+        }
+
+        function endGame(winnerRole) {
+            state.status = 'ended';
+            const modal = document.getElementById('game-over-modal');
+            const text = document.getElementById('winner-text');
+            modal.classList.remove('hidden');
+
+            const name = winnerRole === 'host' ? state.config.hostName : state.config.clientName;
+            text.innerText = `${name} KAZANDI!`;
+            text.style.color = winnerRole === 'host' ? 'var(--host-color)' : 'var(--client-color)'; // Color text by winner
+            AudioSys.win();
+        }
+
+        // --- Physics (Host Only) ---
+        function updatePhysics() {
+            const { puck, hostPaddle, clientPaddle } = state.game;
+
+            // 1. Process Host Input
+            hostPaddle.vx = state.input.x - hostPaddle.x;
+            hostPaddle.vy = state.input.y - hostPaddle.y;
+            hostPaddle.x = state.input.x;
+            hostPaddle.y = state.input.y;
+
+            // 2. Client Paddle (Lerped/Set via Network) - already updated by data handler
+
+            // 3. Move Puck
+            puck.x += puck.vx;
+            puck.y += puck.vy;
+            puck.vx *= FRICTION;
+            puck.vy *= FRICTION;
+
+            // 4. Wall Collisions
+            if (puck.x - PUCK_RADIUS < 0) {
+                puck.x = PUCK_RADIUS;
+                puck.vx *= -1;
+                AudioSys.hitWall();
+            } else if (puck.x + PUCK_RADIUS > CANVAS_WIDTH) {
+                puck.x = CANVAS_WIDTH - PUCK_RADIUS;
+                puck.vx *= -1;
+                AudioSys.hitWall();
+            }
+
+            // Goal Check
+            const inGoalX = puck.x > (CANVAS_WIDTH - GOAL_SIZE) / 2 && puck.x < (CANVAS_WIDTH + GOAL_SIZE) / 2;
+
+            if (!inGoalX) {
+                if (puck.y - PUCK_RADIUS < 0) {
+                    puck.y = PUCK_RADIUS;
+                    puck.vy *= -1;
+                    AudioSys.hitWall();
+                } else if (puck.y + PUCK_RADIUS > CANVAS_HEIGHT) {
+                    puck.y = CANVAS_HEIGHT - PUCK_RADIUS;
+                    puck.vy *= -1;
+                    AudioSys.hitWall();
+                }
+            } else {
+                // SCORING
+                if (puck.y < -PUCK_RADIUS) {
+                    // Host Scores (Top Goal)
+                    score('host');
+                } else if (puck.y > CANVAS_HEIGHT + PUCK_RADIUS) {
+                    // Client Scores (Bottom Goal)
+                    score('client');
+                }
+            }
+
+            // 5. Paddle Collisions
+            checkPaddleCollision(hostPaddle);
+            checkPaddleCollision(clientPaddle);
+        }
+
+        function checkPaddleCollision(paddle) {
+            const p = state.game.puck;
+            const dx = p.x - paddle.x;
+            const dy = p.y - paddle.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const minDist = PUCK_RADIUS + PADDLE_RADIUS;
+
+            if (dist < minDist) {
+                AudioSys.hitPaddle();
+                vibrate(30);
+
+                const nx = dx / dist;
+                const ny = dy / dist;
+
+                // Separate
+                const overlap = minDist - dist;
+                p.x += nx * overlap;
+                p.y += ny * overlap;
+
+                // Reflect
+                const rvx = p.vx - paddle.vx;
+                const rvy = p.vy - paddle.vy;
+                const velNormal = rvx * nx + rvy * ny;
+
+                if (velNormal < 0) {
+                    const bounce = -1.2 * velNormal;
+                    p.vx += bounce * nx;
+                    p.vy += bounce * ny;
+                    p.vx += paddle.vx * 0.4;
+                    p.vy += paddle.vy * 0.4;
+                }
+
+                // Clamp
+                const s = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+                if (s > MAX_SPEED) {
+                    p.vx = (p.vx / s) * MAX_SPEED;
+                    p.vy = (p.vy / s) * MAX_SPEED;
+                }
+            }
+        }
+
+        function score(scorer) {
+            if (scorer === 'host') state.game.score.host++;
+            else state.game.score.client++;
+
+            AudioSys.score();
+            vibrate(200);
+
+            // Particles (Sync trigger to client?)
+            // Host creates particles locally
+            const y = scorer === 'host' ? 0 : CANVAS_HEIGHT;
+            const color = scorer === 'host' ? '#00ff00' : '#ff00ff';
+            spawnParticles(state.game.puck.x, y, color, 60);
+
+            // Send particle event to client so they see it too
+            if (state.conn) {
+                state.conn.send({ type: 'particle', x: state.game.puck.x, y: y, color: color });
+            }
+
+            // Check Win
+            if (state.game.score[scorer] >= state.config.maxScore) {
+                endGame(scorer);
+                if (state.conn) state.conn.send({ type: 'end', winner: scorer });
+            } else {
+                resetPuck(scorer);
+            }
+        }
+
+        function resetPuck(lastScorer) {
+            const p = state.game.puck;
+            p.x = CANVAS_WIDTH / 2;
+            p.y = CANVAS_HEIGHT / 2;
+            p.vx = 0;
+            p.vy = lastScorer === 'host' ? 4 : -4; // Increased serve speed
+        }
+
+
+        // --- Input ---
+        function handleInput(e) {
+            if (state.status !== 'playing') return;
+            e.preventDefault();
+
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.changedTouches ? e.changedTouches[0] : e;
+
+            let cx = (touch.clientX - rect.left) * (CANVAS_WIDTH / rect.width);
+            let cy = (touch.clientY - rect.top) * (CANVAS_HEIGHT / rect.height);
+
+            cx = Math.max(PADDLE_RADIUS, Math.min(CANVAS_WIDTH - PADDLE_RADIUS, cx));
+            cy = Math.max(PADDLE_RADIUS, Math.min(CANVAS_HEIGHT - PADDLE_RADIUS, cy));
+
+            // Lock to Bottom Half (Visual)
+            if (cy < CANVAS_HEIGHT / 2 + PADDLE_RADIUS) cy = CANVAS_HEIGHT / 2 + PADDLE_RADIUS;
+
+            state.input.x = cx;
+            state.input.y = cy;
+
+            if (state.role === 'client' && state.conn) {
+                // Client is Visual Bottom -> Logical Top
+                // Send Logical Coords
+                state.conn.send({
+                    type: 'input',
+                    x: cx,
+                    y: CANVAS_HEIGHT - cy
+                });
+            }
+        }
+        canvas.addEventListener('mousemove', handleInput);
+        canvas.addEventListener('touchmove', handleInput, { passive: false });
+
+
+        // --- Loop ---
+        function loop() {
+            if (state.status !== 'playing' && state.status !== 'ended') return;
+
+            if (state.role === 'host' && state.status === 'playing') {
+                updatePhysics();
+                if (state.conn) {
+                    state.conn.send({
+                        type: 'state',
+                        game: state.game
+                    });
+                }
+            }
+
+            updateParticles();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        function draw() {
+            ctx.fillStyle = '#121212';
+            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+            const tY = (y) => state.role === 'client' ? CANVAS_HEIGHT - y : y;
+
+            // Draw Goal Areas (Distinct)
+            // Top Goal (Reddish)
+            // If I am client, Top is HOST. If I am host, Top is CLIENT.
+            // Goals are fixed logical positions.
+
+            const goalW = GOAL_SIZE;
+            const goalX = (CANVAS_WIDTH - goalW) / 2;
+
+            // Logical Top Goal Area
+            ctx.fillStyle = 'rgba(255, 0, 0, 0.2)';
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = 'red';
+            ctx.fillRect(goalX, tY(0) > tY(CANVAS_HEIGHT) ? tY(0) - 10 : tY(0), goalW, 10);
+            ctx.shadowBlur = 0;
+
+            // Logical Bottom Goal Area (Blueish)
+            ctx.fillStyle = 'rgba(0, 0, 255, 0.2)';
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = 'blue';
+            ctx.fillRect(goalX, tY(CANVAS_HEIGHT) > tY(0) ? tY(CANVAS_HEIGHT) - 10 : tY(CANVAS_HEIGHT), goalW, 10);
+            ctx.shadowBlur = 0;
+
+
+            // Decoration (Center)
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(0, CANVAS_HEIGHT / 2);
+            ctx.lineTo(CANVAS_WIDTH, CANVAS_HEIGHT / 2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, 60, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Particles (Behind objects)
+            drawParticles(state.role === 'client' ? tY : null);
+
+            const g = state.game;
+
+            // Paddles
+            drawCircle(g.hostPaddle.x, tY(g.hostPaddle.y), PADDLE_RADIUS, '#00ff00');
+            drawCircle(g.clientPaddle.x, tY(g.clientPaddle.y), PADDLE_RADIUS, '#ff00ff');
+
+            // Puck
+            drawCircle(g.puck.x, tY(g.puck.y), PUCK_RADIUS, '#00ffff');
+
+            if (state.role === 'host') {
+                document.getElementById('score-bottom').innerText = g.score.host;
+                document.getElementById('score-top').innerText = g.score.client;
+            } else {
+                document.getElementById('score-bottom').innerText = g.score.client;
+                document.getElementById('score-top').innerText = g.score.host;
+            }
+        }
+
+        function drawCircle(x, y, r, color) {
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = color;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+
+        // --- Setup & Network ---
+        const createBtn = document.getElementById('create-btn');
+        const aboutBtn = document.getElementById('about-btn');
+        const closeAboutBtn = document.getElementById('close-about');
+
+        aboutBtn.onclick = () => document.getElementById('about-modal').classList.remove('hidden');
+        closeAboutBtn.onclick = () => document.getElementById('about-modal').classList.add('hidden');
+
+        const roomParam = getQueryParam('room');
+
+        if (roomParam) {
+            document.getElementById('host-options').style.display = 'none';
+            createBtn.innerText = "OYUNA KATIL";
+
+            createBtn.onclick = () => {
+                const name = document.getElementById('username-input').value || "Misafir";
+                state.config.clientName = name;
+                state.role = 'client';
+                initClient(roomParam);
+            };
+        } else {
+            createBtn.onclick = () => {
+                const name = document.getElementById('username-input').value || "Ev Sahibi";
+                const limit = parseInt(document.getElementById('score-limit').value);
+                state.config.hostName = name;
+                state.config.maxScore = limit;
+                state.role = 'host';
+                initHost();
+            };
+        }
+
+        function initHost() {
+            state.peer = new Peer();
+            document.getElementById('create-btn').innerText = "Başlatılıyor...";
+
+            state.peer.on('open', (id) => {
+                document.getElementById('main-menu').classList.add('hidden');
+                document.getElementById('waiting-room').classList.remove('hidden');
+
+                const url = `${window.location.origin}${window.location.pathname}?room=${id}`;
+                document.getElementById('share-link').innerText = url;
+                new QRCode(document.getElementById('qrcode'), { text: url, width: 150, height: 150 });
+            });
+
+            state.peer.on('connection', (conn) => {
+                state.conn = conn;
+                conn.on('open', () => { });
+                conn.on('data', (msg) => {
+                    if (msg.type === 'handshake') {
+                        state.config.clientName = msg.name;
+                        conn.send({ type: 'start', config: state.config });
+                        startGame();
+                    } else if (msg.type === 'input') {
+                        const tX = msg.x;
+                        const tY = msg.y;
+                        state.game.clientPaddle.vx = tX - state.game.clientPaddle.x;
+                        state.game.clientPaddle.vy = tY - state.game.clientPaddle.y;
+                        state.game.clientPaddle.x = tX;
+                        state.game.clientPaddle.y = tY;
+                    }
+                });
+            });
+        }
+
+        function initClient(roomId) {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('join-status').style.display = 'block';
+
+            state.peer = new Peer();
+            state.peer.on('open', () => {
+                const conn = state.peer.connect(roomId);
+                state.conn = conn;
+
+                conn.on('open', () => {
+                    conn.send({ type: 'handshake', name: state.config.clientName });
+                });
+
+                conn.on('data', (msg) => {
+                    if (msg.type === 'start') {
+                        state.config = msg.config;
+                        state.role = 'client';
+                        startGame();
+                    } else if (msg.type === 'state') {
+                        state.game = msg.game;
+                    } else if (msg.type === 'particle') {
+                        // Client receives particle spawn event
+                        // x, y are logical. Client needs to flip them visually in draw, 
+                        // OR we spawn them logically here.
+                        // Our particle system stores Logical Position.
+                        // drawParticles handles the flip.
+                        spawnParticles(msg.x, msg.y, msg.color, 60);
+                    } else if (msg.type === 'end') {
+                        endGame(msg.winner);
+                    }
+                });
+            });
+        }
+
+    </script>
+</body>
+
+</html>
